@@ -6,17 +6,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
 {
     [RequireComponent(typeof (Rigidbody))]
     [RequireComponent(typeof (CapsuleCollider))]
-    public class RigidbodyFirstPersonController : MonoBehaviour
+    public class MovementController : MonoBehaviour
     {
+
         [Serializable]
         public class MovementSettings
         {
-            public float ForwardSpeed = 8.0f;   // Speed when walking forward
-            public float BackwardSpeed = 4.0f;  // Speed when walking backwards
-            public float StrafeSpeed = 4.0f;    // Speed when walking sideways
-            public float RunMultiplier = 2.0f;   // Speed when sprinting
-	        public KeyCode RunKey = KeyCode.LeftShift;
-            public float JumpForce = 30f;
+
+            private PlayerAttributes playerAttributes;
+            public KeyCode RunKey = KeyCode.LeftShift;
             public AnimationCurve SlopeCurveModifier = new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(90.0f, 0.0f));
             [HideInInspector] public float CurrentTargetSpeed = 8f;
 
@@ -24,29 +22,33 @@ namespace UnityStandardAssets.Characters.FirstPerson
             private bool m_Running;
 #endif
 
+            public MovementSettings(PlayerAttributes playerAttributes1) {
+                playerAttributes = playerAttributes1;
+            }
+
             public void UpdateDesiredTargetSpeed(Vector2 input)
             {
 	            if (input == Vector2.zero) return;
 				if (input.x > 0 || input.x < 0)
 				{
 					//strafe
-					CurrentTargetSpeed = StrafeSpeed;
+					CurrentTargetSpeed = playerAttributes.StrafeSpeed;
 				}
 				if (input.y < 0)
 				{
 					//backwards
-					CurrentTargetSpeed = BackwardSpeed;
+					CurrentTargetSpeed = playerAttributes.BackwardSpeed;
 				}
 				if (input.y > 0)
 				{
 					//forwards
 					//handled last as if strafing and moving forward at the same time forwards speed should take precedence
-					CurrentTargetSpeed = ForwardSpeed;
+					CurrentTargetSpeed = playerAttributes.ForwardSpeed;
 				}
 #if !MOBILE_INPUT
 	            if (Input.GetKey(RunKey))
 	            {
-		            CurrentTargetSpeed *= RunMultiplier;
+		            CurrentTargetSpeed *= playerAttributes.RunMultiplier;
 		            m_Running = true;
 	            }
 	            else
@@ -78,11 +80,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 
         public Camera cam;
-        public MovementSettings movementSettings = new MovementSettings();
+        public MovementSettings movementSettings;
         public MouseLook mouseLook = new MouseLook();
         public AdvancedSettings advancedSettings = new AdvancedSettings();
 
-
+        private PlayerAttributes playerAttributes;
         private Rigidbody m_RigidBody;
         private CapsuleCollider m_Capsule;
         private float m_YRotation;
@@ -120,6 +122,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Start()
         {
+            movementSettings = new MovementSettings(GetComponent<PlayerAttributes>());
             m_RigidBody = GetComponent<Rigidbody>();
             m_Capsule = GetComponent<CapsuleCollider>();
             mouseLook.Init (transform, cam.transform);
@@ -166,7 +169,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     m_RigidBody.drag = 0f;
                     m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
-                    m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
+                    m_RigidBody.AddForce(new Vector3(0f, playerAttributes.JumpForce, 0f), ForceMode.Impulse);
                     m_Jumping = true;
                 }
 

@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class shoot : MonoBehaviour {
+public class ShootController : MonoBehaviour {
 
     public Camera fpsCam;
-
-    public float damage = 10f;
+    
     public float range = 100f;
-	// Update is called once per frame
-	void Update () {
+    private PlayerAttributes playerAttributes;
+
+    private void Start() {
+        playerAttributes = GetComponent<PlayerAttributes>();
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         if (Input.GetMouseButtonDown(0)) {
             Shoot();
@@ -27,7 +32,7 @@ public class shoot : MonoBehaviour {
             PlayerInfo targetInfo= hit.transform.GetComponent<PlayerInfo>();
 
             if (target != null) {
-                target.takeDamage(damage);
+                target.takeDamage(playerAttributes.Damage);
                 if (target.isDead){
                     targetInfo.deaths++;
                 }

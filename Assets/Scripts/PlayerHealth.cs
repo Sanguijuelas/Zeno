@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
 
-    public float startingHealth = 100f;
+
     public float currentHealth;
     public Slider healthSlider;
     public Image damage;
@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        currentHealth = startingHealth;
+        currentHealth = GetComponent<PlayerAttributes>().Health;
     }
 
     // Update is called once per frame

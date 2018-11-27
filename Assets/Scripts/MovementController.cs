@@ -122,7 +122,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Start()
         {
-            movementSettings = new MovementSettings(GetComponent<PlayerAttributes>());
+            playerAttributes = GetComponent<PlayerAttributes>();
+            movementSettings = new MovementSettings(playerAttributes);
             m_RigidBody = GetComponent<Rigidbody>();
             m_Capsule = GetComponent<CapsuleCollider>();
             mouseLook.Init (transform, cam.transform);
@@ -131,6 +132,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Update()
         {
+            if (playerAttributes.IsPaused())
+            {
+                return;
+            }
+
             RotateView();
 
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
@@ -142,6 +148,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
+            if (playerAttributes.IsPaused())
+            {
+                return;
+            }
+
             GroundCheck();
             Vector2 input = GetInput();
 

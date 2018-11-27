@@ -23,6 +23,9 @@ public class ShootController : MonoBehaviour {
 	}
 
     void Shoot() {
+        if (playerAttributes.IsPaused()) {
+            return;
+        }
 
         RaycastHit hit;
 

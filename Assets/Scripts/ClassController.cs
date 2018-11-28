@@ -22,7 +22,8 @@ public class ClassController : MonoBehaviour {
 
     public void ChooseKnight()
     {
-        playerAttributes.Damage = 25.0f;
+        playerAttributes.Damage = 15.0f;
+//        playerAttributes.ShootSpeed = .3f;
         uIController.changeUI(UIController.GameUI.WAITING);
     }
 

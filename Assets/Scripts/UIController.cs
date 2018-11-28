@@ -28,11 +28,6 @@ public class UIController : MonoBehaviour {
         uiControllers.Add(this);
     }
 
-    public void Respawn()
-    {
-        changeUI(GameUI.GAME);
-    }
-
     public void changeUI(GameUI gameUI) {
         if (gameUI == selected)
         {

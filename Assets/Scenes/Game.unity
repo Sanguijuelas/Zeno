@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: a7bed68887a07e34394d4191b3081359, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.24939394, g: 0.31173864, b: 0.36743417, a: 1}
+  m_IndirectSpecularColor: {r: 0.24939346, g: 0.3117382, b: 0.3674335, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -908,7 +908,6 @@ MonoBehaviour:
   damage: {fileID: 945256709}
   flash: 4
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
-  isDead: 0
 --- !u!114 &115140593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1103,6 +1102,12 @@ MonoBehaviour:
   RunMultiplier: 2
   JumpForce: 30
   range: 100
+  kills: 0
+  deaths: 0
+  initialX: 0
+  initialZ: 0
+  player: {fileID: 0}
+  initial: {x: 0, y: 0, z: 0}
 --- !u!114 &115140602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5178,7 +5183,6 @@ MonoBehaviour:
   damage: {fileID: 815874586}
   flash: 4
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
-  isDead: 0
 --- !u!114 &796926510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5198,6 +5202,12 @@ MonoBehaviour:
   RunMultiplier: 2
   JumpForce: 30
   range: 100
+  kills: 0
+  deaths: 0
+  initialX: 0
+  initialZ: 0
+  player: {fileID: 0}
+  initial: {x: 0, y: 0, z: 0}
 --- !u!114 &796926511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6081,7 +6091,6 @@ MonoBehaviour:
   damage: {fileID: 385660734}
   flash: 4
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
-  isDead: 0
 --- !u!114 &901464661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6276,6 +6285,12 @@ MonoBehaviour:
   RunMultiplier: 2
   JumpForce: 30
   range: 100
+  kills: 0
+  deaths: 0
+  initialX: 0
+  initialZ: 0
+  player: {fileID: 0}
+  initial: {x: 0, y: 0, z: 0}
 --- !u!114 &901464670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6615,7 +6630,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 115140603}
+      - m_Target: {fileID: 115140592}
         m_MethodName: Respawn
         m_Mode: 1
         m_Arguments:
@@ -8033,7 +8048,6 @@ MonoBehaviour:
   damage: {fileID: 1675180540}
   flash: 4
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
-  isDead: 0
 --- !u!114 &1237633403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8066,6 +8080,12 @@ MonoBehaviour:
   RunMultiplier: 2
   JumpForce: 30
   range: 100
+  kills: 0
+  deaths: 0
+  initialX: 0
+  initialZ: 0
+  player: {fileID: 0}
+  initial: {x: 0, y: 0, z: 0}
 --- !u!114 &1237633405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8535,7 +8555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000019073, y: -0}
+  m_AnchoredPosition: {x: -0.0000019073, y: 0}
   m_SizeDelta: {x: 520.77, y: 54.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1311050168
@@ -10708,7 +10728,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 901464671}
+      - m_Target: {fileID: 901464660}
         m_MethodName: Respawn
         m_Mode: 1
         m_Arguments:
@@ -11789,7 +11809,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1237633406}
+      - m_Target: {fileID: 1237633402}
         m_MethodName: Respawn
         m_Mode: 1
         m_Arguments:
@@ -12865,7 +12885,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 796926511}
+      - m_Target: {fileID: 796926509}
         m_MethodName: Respawn
         m_Mode: 1
         m_Arguments:

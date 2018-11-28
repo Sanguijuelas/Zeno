@@ -32,13 +32,9 @@ public class ShootController : MonoBehaviour {
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) {
 
             PlayerHealth target = hit.transform.GetComponent<PlayerHealth>();
-            PlayerInfo targetInfo= hit.transform.GetComponent<PlayerInfo>();
 
             if (target != null) {
-                target.takeDamage(playerAttributes.Damage);
-                if (target.isDead){
-                    targetInfo.deaths++;
-                }
+                target.takeDamage(playerAttributes.Damage, playerAttributes);
             }
         }
     }

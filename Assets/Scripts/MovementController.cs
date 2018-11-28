@@ -135,8 +135,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (playerAttributes.IsPaused())
             {
                 return;
-            }
-
+            } 
             RotateView();
 
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)

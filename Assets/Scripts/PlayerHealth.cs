@@ -12,13 +12,14 @@ public class PlayerHealth : MonoBehaviour
     public Image damage;
     public float flash = 4f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
-    public bool isDead;
     bool damaged;
+    private UIController uiController;
 
     // Use this for initialization
     void Awake()
     {
         currentHealth = GetComponent<PlayerAttributes>().Health;
+        uiController = GetComponent<UIController>();
     }
 
     // Update is called once per frame
@@ -35,19 +36,29 @@ public class PlayerHealth : MonoBehaviour
         damaged = false;
     }
 
-    public void takeDamage(float amount)
+    public void takeDamage(float amount, PlayerAttributes shooterAttributes)
     {
         damaged = true;
         currentHealth -= amount;
         healthSlider.value = currentHealth;
-        if (currentHealth <= 5 && !isDead)
+        if (currentHealth <= 5)
         {
             healthSlider.value = 0;
-            Death();
+            Die();
+            shooterAttributes.kills++;
         }
     }
 
-    void Death(){
-        isDead = true;
+    void Die()
+    {
+        GetComponent<PlayerAttributes>().deaths++;
+        uiController.changeUI(UIController.GameUI.RESPAWN);
+    }
+
+    public void Respawn(){
+        gameObject.transform.position = GetComponent<PlayerAttributes>().initial;
+        currentHealth = 100;
+        healthSlider.value = currentHealth;
+        uiController.changeUI(UIController.GameUI.GAME);
     }
 }
